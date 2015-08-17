@@ -23,9 +23,10 @@ best <- function(state,outcome){
         ## Read data
         data <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
         ## Bind together columns for State, Hospital, and Outcome
-        frame <- data.frame(data[,2],data[,7],data[,col], stringsAsFactors = FALSE)
+        frame <- data.frame(data[,2],data[,7],as.numeric(data[,col]), stringsAsFactors = FALSE)
         stateframe <- frame[frame$data...7. == state,]
         ## Find the minimum and any repeats
-        mins <- match(min(stateframe[,3]),stateframe[,3])
-        stateframe[mins,1]
+        ordered <- stateframe[order(stateframe[,1]),]
+        reorder <- ordered[order(ordered[,3]),]
+        reorder[1,1]
 }
