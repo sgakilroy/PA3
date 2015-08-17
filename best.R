@@ -25,7 +25,7 @@ best <- function(state,outcome){
         ## Bind together columns for State, Hospital, and Outcome
         frame <- data.frame(data[,2],data[,7],as.numeric(data[,col]), stringsAsFactors = FALSE)
         stateframe <- frame[frame$data...7. == state,]
-        ## Find the minimum and any repeats
+        ## Order twice to sort Mortality Rate and Hospital Names
         ordered <- stateframe[order(stateframe[,1]),]
         reorder <- ordered[order(ordered[,3]),]
         reorder[1,1]
