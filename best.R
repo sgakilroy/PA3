@@ -1,7 +1,11 @@
-best <- function(outcome){
+best <- function(state,outcome){
         ## Valid states
-        states <- c("AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY")
-        ## Check that outcome is valid
+        states <- c("AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID",
+                    "IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS",
+                    "MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK",
+                    "OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV",
+                    "WI","WY")
+        ## Check that state and outcome are valid
         if (state %in% states){
                 
         }else {
@@ -18,11 +22,13 @@ best <- function(outcome){
         }
         ## Read data
         data <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
-        outdata <- data[, col]
-        clean <- outdata[complete.cases(as.numeric(outdata))]
-        ## Check that state is valid
-        ## is there a better way than a giant if statement with all 50 states?
-        ## are all 50 states even in the csv file?
-        ## Return hospital name in that state with lowest 30-day death rate
-        ## try using min function over
+        ## Bind together columns for State, Hospital, and Outcome
+        sort <- cbind(data[,2],data[,7],data[,col])
+        ## Find the minimum and any repeats
+        mins <- match(min(sort[,3]),sort[,3])
+        sort[mins,1]
+        
+        ## Take in only complete cases
+        ## clean <- sort[complete.cases(as.numeric(sort))]
 }
+
